@@ -1,0 +1,18 @@
+<svg width="260" height="72" viewBox="0 0 260 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Bar chart icon -->
+  <rect x="4" y="46" width="11" height="20" rx="2" fill="#B8963E" opacity="0.6"/>
+  <rect x="19" y="32" width="11" height="34" rx="2" fill="#B8963E" opacity="0.8"/>
+  <rect x="34" y="18" width="11" height="48" rx="2" fill="#B8963E"/>
+  <!-- Trend arrow -->
+  <polyline points="9,42 24,28 39,14 52,6" stroke="#D4AF6A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <!-- Arrowhead -->
+  <polyline points="45,4 54,6 52,15" stroke="#D4AF6A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <!-- Pillar base line -->
+  <line x1="2" y1="68" x2="60" y2="68" stroke="#B8963E" stroke-width="1.5" opacity="0.5"/>
+  <!-- Vertical separator -->
+  <line x1="72" y1="10" x2="72" y2="62" stroke="#B8963E" stroke-width="1" opacity="0.3"/>
+  <!-- Company name -->
+  <text x="82" y="34" font-family="Georgia, 'Times New Roman', serif" font-size="22" font-weight="700" fill="#B8963E" letter-spacing="0.8">FİM GROUP</text>
+  <text x="83" y="52" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="400" fill="#B8963E" letter-spacing="4.5">CONSULTİNG</text>
+  <text x="83" y="65" font-family="Arial, Helvetica, sans-serif" font-size="8" font-weight="300" fill="#8B6914" letter-spacing="3" opacity="0.85">MMC</text>
+</svg>

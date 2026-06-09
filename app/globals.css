@@ -1,0 +1,167 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --gold: #b8963e;
+  --gold-light: #d4af6a;
+  --gold-dark: #8b6914;
+  --dark: #0d0d0d;
+  --dark-100: #1a1a1a;
+  --off-white: #f8f6f0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--dark);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: #0d0d0d;
+}
+::-webkit-scrollbar-thumb {
+  background: #b8963e;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #d4af6a;
+}
+
+/* Glass morphism */
+.glass {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(184, 150, 62, 0.18);
+}
+
+.glass-light {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(184, 150, 62, 0.25);
+}
+
+/* Gold gradient text */
+.text-gold-gradient {
+  background: linear-gradient(135deg, #d4af6a 0%, #b8963e 50%, #8b6914 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Gold gradient border */
+.border-gold-gradient {
+  position: relative;
+}
+.border-gold-gradient::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, #d4af6a, #b8963e, #8b6914);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+/* Section heading underline */
+.heading-underline::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, #d4af6a, #b8963e);
+  margin-top: 12px;
+  border-radius: 2px;
+}
+
+.heading-underline-center::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, #d4af6a, #b8963e);
+  margin: 12px auto 0;
+  border-radius: 2px;
+}
+
+/* Grid background */
+.bg-grid {
+  background-image: linear-gradient(
+      rgba(184, 150, 62, 0.04) 1px,
+      transparent 1px
+    ),
+    linear-gradient(90deg, rgba(184, 150, 62, 0.04) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+
+/* Noise texture overlay */
+.noise::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  opacity: 0.4;
+}
+
+/* Prose styles for news content */
+.prose-gold {
+  color: #e5e5e5;
+  line-height: 1.8;
+  font-family: var(--font-inter), system-ui, sans-serif;
+}
+.prose-gold h1,
+.prose-gold h2,
+.prose-gold h3 {
+  font-family: var(--font-playfair), Georgia, serif;
+  color: #d4af6a;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+}
+.prose-gold p {
+  margin-bottom: 1.2em;
+}
+.prose-gold strong {
+  color: #d4af6a;
+}
+.prose-gold ul,
+.prose-gold ol {
+  padding-left: 1.5em;
+  margin-bottom: 1.2em;
+}
+.prose-gold li {
+  margin-bottom: 0.4em;
+}
+
+/* Admin form focus styles */
+.admin-input {
+  @apply w-full px-3 py-2 bg-dark-200 border border-dark-300 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-gold transition-colors text-sm;
+}
+
+.admin-label {
+  @apply block text-sm font-medium text-gray-300 mb-1;
+}
+
+/* Status badge */
+.badge-published {
+  @apply inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20;
+}
+.badge-draft {
+  @apply inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-gray-500/10 text-gray-400 border border-gray-500/20;
+}
+.badge-unread {
+  @apply inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-blue-500/10 text-blue-400 border border-blue-500/20;
+}
+.badge-read {
+  @apply inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-gray-500/10 text-gray-500 border border-gray-500/20;
+}
