@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 
+export const dynamic = "force-dynamic";
+
 export async function GET() {
   const settings = await db.setting.findMany();
   const obj = Object.fromEntries(settings.map((s) => [s.key, s.value]));

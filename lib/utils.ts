@@ -15,7 +15,7 @@ export function formatDate(date: Date | string): string {
 
 export function slugify(text: string): string {
   const map: Record<string, string> = {
-    ə: "e", ə: "e", ğ: "g", ı: "i", ö: "o", ü: "u",
+    ə: "e", ğ: "g", ı: "i", ö: "o", ü: "u",
     ç: "c", ş: "s", İ: "i", Ə: "e", Ğ: "g", Ö: "o",
     Ü: "u", Ç: "c", Ş: "s",
   };

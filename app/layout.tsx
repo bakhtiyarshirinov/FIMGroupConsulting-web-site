@@ -15,6 +15,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://localhost:3000"),
   title: {
     default: "FİM GROUP CONSULTİNG MMC | Peşəkar Qiymətləndirmə",
     template: "%s | FİM GROUP CONSULTİNG",

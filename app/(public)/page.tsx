@@ -5,6 +5,8 @@ import { WhyUsSection } from "@/components/home/WhyUsSection";
 import { ContactSection } from "@/components/home/ContactSection";
 import { db } from "@/lib/db";
 
+export const dynamic = "force-dynamic";
+
 export default async function HomePage() {
   const services = await db.service.findMany({
     where: { visible: true },

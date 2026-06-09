@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { db } from "@/lib/db";
+
+export const dynamic = "force-dynamic";
 import { SectionReveal, StaggerContainer, StaggerItem } from "@/components/shared/SectionReveal";
 import { TiltCard } from "@/components/shared/TiltCard";
 import Link from "next/link";

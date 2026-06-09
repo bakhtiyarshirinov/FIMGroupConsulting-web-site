@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { db } from "@/lib/db";
+
+export const dynamic = "force-dynamic";
 import { formatDate } from "@/lib/utils";
 import { SectionReveal } from "@/components/shared/SectionReveal";
 import Link from "next/link";

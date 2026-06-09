@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { SectionReveal, StaggerContainer, StaggerItem } from "@/components/shared/SectionReveal";
 import { StatsCounter } from "@/components/shared/StatsCounter";
+import Image from "next/image";
 import Link from "next/link";
 
 export const metadata: Metadata = {
@@ -9,10 +10,24 @@ export const metadata: Metadata = {
 };
 
 const team = [
-  { name: "Baş Direktor", role: "CEO", placeholder: true },
-  { name: "Baş Qiymətləndiricisi", role: "Chief Appraiser", placeholder: true },
-  { name: "Maliyyə Analitiki", role: "Financial Analyst", placeholder: true },
-  { name: "Hüquq Məsləhətçisi", role: "Legal Advisor", placeholder: true },
+  {
+    name: "Fəqan Səfərəliyev",
+    role: "Təsisçi / Direktor",
+    photo: "/team/sahin.jpg",
+    objectPosition: "center top",
+  },
+  {
+    name: "Beydullayev Elnur",
+    role: "Nümayəndə",
+    photo: "/team/elnur.jpg",
+    objectPosition: "center top",
+  },
+  {
+    name: "Allahverdiyev Şahin",
+    role: "Qiymətləndirici",
+    photo: "/team/fagan.jpg",
+    objectPosition: "center 20%",
+  },
 ];
 
 const milestones = [
@@ -165,17 +180,29 @@ export default function HaqqimizdaPage() {
             <p className="text-gray-400 font-inter">Peşəkar mütəxəssislərdən ibarət komanda</p>
           </SectionReveal>
 
-          <StaggerContainer className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-3xl mx-auto">
             {team.map((member) => (
-              <StaggerItem key={member.role}>
-                <div className="glass border border-gold/15 rounded-2xl p-6 text-center hover:border-gold/30 transition-all hover:shadow-gold-sm">
-                  <div className="w-16 h-16 rounded-full bg-gold/10 border border-gold/20 flex items-center justify-center text-gold text-2xl mx-auto mb-4">
-                    <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                    </svg>
+              <StaggerItem key={member.name}>
+                <div className="glass border border-gold/15 rounded-2xl p-6 text-center hover:border-gold/35 transition-all duration-300 hover:shadow-gold-sm group">
+                  {/* Photo */}
+                  <div className="relative w-28 h-28 mx-auto mb-5 rounded-2xl overflow-hidden border-2 border-gold/25 group-hover:border-gold/50 transition-all duration-300">
+                    <Image
+                      src={member.photo}
+                      alt={member.name}
+                      fill
+                      className="object-cover"
+                      style={{ objectPosition: member.objectPosition }}
+                      sizes="112px"
+                    />
+                    {/* Subtle gold overlay on hover */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-gold/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   </div>
-                  <div className="text-white font-inter font-medium text-sm mb-1">{member.name}</div>
-                  <div className="text-gray-500 text-xs">{member.role}</div>
+                  {/* Name */}
+                  <div className="font-playfair text-gold font-bold text-lg leading-snug mb-1">
+                    {member.name}
+                  </div>
+                  {/* Title */}
+                  <div className="text-gray-400 text-sm font-inter">{member.role}</div>
                 </div>
               </StaggerItem>
             ))}

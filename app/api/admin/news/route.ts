@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { slugify } from "@/lib/utils";
 
+export const dynamic = "force-dynamic";
+
 export async function GET() {
   const news = await db.news.findMany({ orderBy: { createdAt: "desc" } });
   return NextResponse.json(news);

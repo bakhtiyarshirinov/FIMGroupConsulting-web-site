@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { db } from "@/lib/db";
+
+export const dynamic = "force-dynamic";
 import { formatDate, truncate } from "@/lib/utils";
 import { SectionReveal, StaggerContainer, StaggerItem } from "@/components/shared/SectionReveal";
 import Link from "next/link";
