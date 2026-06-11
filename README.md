@@ -146,22 +146,28 @@ git push -u origin main
 | `JWT_SECRET` | random 32+ character string |
 | `NEXT_PUBLIC_SITE_URL` | `https://yourdomain.com` |
 
-3. Deploy — Vercel runs `prisma migrate deploy && next build` automatically
+3. Deploy — Vercel runs `prisma generate && next build` automatically
 
-### 4. Seed initial data (first deploy only)
+### 4. Run migrations and seed (before first use)
 
-In Vercel dashboard → your project → **Functions** tab → open a terminal, or use the Vercel CLI:
+Vercel build does **not** run migrations — run these locally against the production database:
 
 ```bash
+# Pull Vercel env vars locally
 npx vercel env pull .env.local
-npx prisma migrate deploy
-npx prisma db seed
+
+# Apply migrations
+DATABASE_URL="<your_neon_connection_string>" npx prisma migrate deploy
+
+# Seed initial data
+DATABASE_URL="<your_neon_connection_string>" npx prisma db seed
 ```
 
-Or run locally with production `DATABASE_URL`:
+Or set `DATABASE_URL` in your local `.env` temporarily and run:
 
 ```bash
-DATABASE_URL="postgresql://..." npx prisma db seed
+npx prisma migrate deploy
+npx prisma db seed
 ```
 
 ### 5. Add custom domain
