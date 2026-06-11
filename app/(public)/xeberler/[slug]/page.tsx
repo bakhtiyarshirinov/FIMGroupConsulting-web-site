@@ -1,19 +1,21 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { db } from "@/lib/db";
-
-export const dynamic = "force-dynamic";
 import { formatDate } from "@/lib/utils";
 import { SectionReveal } from "@/components/shared/SectionReveal";
 import Link from "next/link";
 import Image from "next/image";
+import { staticNews } from "@/lib/news";
 
 interface Props {
   params: { slug: string };
 }
 
+export function generateStaticParams() {
+  return staticNews.map((article) => ({ slug: article.slug }));
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const article = await db.news.findUnique({ where: { slug: params.slug } });
+  const article = staticNews.find((a) => a.slug === params.slug);
   if (!article) return { title: "Tapılmadı" };
   return {
     title: article.titleAz,
@@ -21,24 +23,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default async function NewsArticlePage({ params }: Props) {
-  const article = await db.news.findUnique({
-    where: { slug: params.slug, published: true },
-  });
-
+export default function NewsArticlePage({ params }: Props) {
+  const article = staticNews.find((a) => a.slug === params.slug);
   if (!article) notFound();
 
-  const related = await db.news.findMany({
-    where: { published: true, NOT: { slug: params.slug } },
-    take: 3,
-    orderBy: { createdAt: "desc" },
-  });
+  const related = staticNews.filter((a) => a.slug !== params.slug);
 
-  // Convert plain text with **bold** and newlines to paragraphs
   const formatContent = (text: string) => {
     return text
       .split("\n\n")
-      .map((para, i) => {
+      .map((para) => {
         const formatted = para
           .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
           .replace(/\n/g, "<br/>");

@@ -1,7 +1,4 @@
 import type { Metadata } from "next";
-import { db } from "@/lib/db";
-
-export const dynamic = "force-dynamic";
 import { SectionReveal, StaggerContainer, StaggerItem } from "@/components/shared/SectionReveal";
 import { TiltCard } from "@/components/shared/TiltCard";
 import Link from "next/link";
@@ -47,12 +44,50 @@ const bullets: Record<string, string[]> = {
   star: ["Patentlər və lisenziyalar", "Ticarət nişanları", "Qiymətli kağızlar", "Pay iştirakı", "Proqram təminatı"],
 };
 
-export default async function XidmetlerPage() {
-  const services = await db.service.findMany({
-    where: { visible: true },
-    orderBy: { order: "asc" },
-  });
+const services = [
+  {
+    id: 1,
+    titleAz: "Daşınar Əmlakın Qiymətləndirilməsi",
+    titleRu: "Оценка движимого имущества",
+    descriptionAz:
+      "Maşın, avadanlıq, nəqliyyat vasitələri, heyvanlar, bitkilər və digər daşınar əmlakın peşəkar qiymətləndirilməsi. Müasir metodologiya əsasında dəqiq bazar dəyərinin müəyyənləşdirilməsi.",
+    icon: "truck",
+  },
+  {
+    id: 2,
+    titleAz: "Daşınmaz Əmlakın Qiymətləndirilməsi",
+    titleRu: "Оценка недвижимости",
+    descriptionAz:
+      "Mənzil, ev, torpaq sahəsi, kommersiya obyektləri və digər daşınmaz əmlakın qiymətləndirilməsi. Texniki ekspertiza və bazar analizi əsasında real dəyərin hesablanması.",
+    icon: "building",
+  },
+  {
+    id: 3,
+    titleAz: "Müəssisələrin Qiymətləndirilməsi",
+    titleRu: "Оценка предприятий",
+    descriptionAz:
+      "Biznesin, şirkətin, müəssisənin tam dəyərinin müəyyənləşdirilməsi. Maliyyə göstəriciləri, aktivlər və bazar mövqeyi nəzərə alınmaqla hərtərəfli qiymətləndirmə.",
+    icon: "briefcase",
+  },
+  {
+    id: 4,
+    titleAz: "Dəymiş Zərər və Risklərin Qiymətləndirilməsi",
+    titleRu: "Оценка ущерба и рисков",
+    descriptionAz:
+      "Dəymiş zərərin, əldən çıxmış mənfəətin və sahibkarlıq risklərinin qiymətləndirilməsi. Sığorta, məhkəmə və digər prosedurlar üçün rəsmi ekspert rəyi hazırlanması.",
+    icon: "shield",
+  },
+  {
+    id: 5,
+    titleAz: "Qeyri-Maddi Aktivlərin Qiymətləndirilməsi",
+    titleRu: "Оценка нематериальных активов",
+    descriptionAz:
+      "İntelektual mülkiyyət, qiymətli kağızlar, pay iştirakı, brend dəyəri və digər qeyri-maddi aktivlərin qiymətləndirilməsi. Beynəlxalq standartlara uyğun ekspertiza.",
+    icon: "star",
+  },
+];
 
+export default function XidmetlerPage() {
   return (
     <>
       {/* Hero */}
@@ -97,9 +132,7 @@ export default async function XidmetlerPage() {
                         <h2 className="font-playfair text-2xl md:text-3xl font-bold text-dark mb-4">
                           {service.titleAz}
                         </h2>
-                        {service.titleRu && (
-                          <p className="text-gray-400 text-sm italic mb-4">{service.titleRu}</p>
-                        )}
+                        <p className="text-gray-400 text-sm italic mb-4">{service.titleRu}</p>
                         <p className="text-gray-600 leading-relaxed mb-6 font-inter">
                           {service.descriptionAz}
                         </p>
