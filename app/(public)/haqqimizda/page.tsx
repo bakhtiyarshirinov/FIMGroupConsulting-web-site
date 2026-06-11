@@ -30,14 +30,7 @@ const team = [
   },
 ];
 
-const milestones = [
-  { year: "2010", event: "Şirkətin təsis edilməsi" },
-  { year: "2012", event: "İlk regional layihələr" },
-  { year: "2015", event: "Azərbaycan Qiymətləndiricilər Palatası akkreditasiyası" },
-  { year: "2018", event: "Ağdaş filialının açılması" },
-  { year: "2020", event: "1000+ tamamlanmış layihə" },
-  { year: "2024", event: "Beynəlxalq IVS standartlarına keçid" },
-];
+
 
 export default function HaqqimizdaPage() {
   return (
@@ -54,7 +47,7 @@ export default function HaqqimizdaPage() {
             Haqqımızda
           </h1>
           <p className="text-gray-400 text-xl font-inter max-w-2xl mx-auto">
-            2010-cu ildən Azərbaycanda fəaliyyət göstərən etibarlı qiymətləndirmə tərəfdaşınız
+           Qiymətləndirmə sahəsində etibarlı tərəfdaşınız
           </p>
         </div>
       </section>
@@ -141,34 +134,7 @@ export default function HaqqimizdaPage() {
       </section>
 
       {/* Timeline */}
-      <section className="py-20 bg-off-white">
-        <div className="max-w-4xl mx-auto px-4">
-          <SectionReveal className="text-center mb-12">
-            <h2 className="font-playfair text-4xl font-bold text-dark heading-underline-center mb-4">
-              Şirkətin Tarixi
-            </h2>
-          </SectionReveal>
-
-          <div className="relative">
-            <div className="absolute left-8 top-0 bottom-0 w-px bg-gold/20" />
-            <StaggerContainer className="space-y-6">
-              {milestones.map((m, i) => (
-                <StaggerItem key={m.year}>
-                  <div className="flex items-start gap-6 pl-4">
-                    <div className="relative z-10 w-8 h-8 rounded-full bg-gold/10 border-2 border-gold flex items-center justify-center shrink-0 mt-1">
-                      <div className="w-2 h-2 rounded-full bg-gold" />
-                    </div>
-                    <div className="bg-white border border-gold/15 rounded-xl p-5 flex-1 hover:border-gold/30 transition-colors">
-                      <div className="text-gold font-playfair font-bold text-xl mb-1">{m.year}</div>
-                      <div className="text-dark font-inter">{m.event}</div>
-                    </div>
-                  </div>
-                </StaggerItem>
-              ))}
-            </StaggerContainer>
-          </div>
-        </div>
-      </section>
+     
 
       {/* Team */}
       <section className="py-20 bg-dark">
