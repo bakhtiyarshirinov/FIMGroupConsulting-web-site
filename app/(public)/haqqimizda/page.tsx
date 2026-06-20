@@ -141,12 +141,12 @@ export default function HaqqimizdaPage() {
             <p className="text-gray-400 font-inter">Peşəkar mütəxəssislərdən ibarət komanda</p>
           </SectionReveal>
 
-          <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-3xl mx-auto">
+          <StaggerContainer className="flex flex-wrap justify-center gap-8">
             {team.map((member) => (
-              <StaggerItem key={member.name}>
-                <div className="glass border border-gold/15 rounded-2xl p-6 text-center hover:border-gold/35 transition-all duration-300 hover:shadow-gold-sm group">
+              <StaggerItem key={member.name} className="w-full max-w-[280px] sm:w-[280px]">
+                <div className="glass border border-gold/15 rounded-2xl p-6 text-center transition-all duration-300 hover:-translate-y-1.5 hover:border-gold/50 hover:shadow-gold-sm group h-full">
                   {/* Photo */}
-                  <div className="relative w-28 h-28 mx-auto mb-5 rounded-2xl overflow-hidden border-2 border-gold/25 group-hover:border-gold/50 transition-all duration-300">
+                  <div className="relative w-28 h-28 aspect-square mx-auto mb-5 rounded-2xl overflow-hidden border-2 border-gold/25 group-hover:border-gold/50 transition-all duration-300">
                     <Image
                       src={member.photo}
                       alt={member.name}
