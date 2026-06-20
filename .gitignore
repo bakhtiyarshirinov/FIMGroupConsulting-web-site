@@ -8,3 +8,5 @@ prisma/dev.db-journal
 *.db-journal
 .DS_Store
 out/
+.vercel
+.env*

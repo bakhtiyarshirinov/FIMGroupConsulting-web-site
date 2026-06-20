@@ -22,12 +22,7 @@ const team = [
     photo: "/team/elnur.jpg",
     objectPosition: "center top",
   },
-  {
-    name: "Allahverdiyev Şahin",
-    role: "Qiymətləndirici",
-    photo: "/team/fagan.jpg",
-    objectPosition: "center 20%",
-  },
+  
 ];
 
 
