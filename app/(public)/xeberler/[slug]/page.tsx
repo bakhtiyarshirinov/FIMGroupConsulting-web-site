@@ -4,18 +4,16 @@ import { formatDate } from "@/lib/utils";
 import { SectionReveal } from "@/components/shared/SectionReveal";
 import Link from "next/link";
 import Image from "next/image";
-import { staticNews } from "@/lib/news";
+import { db } from "@/lib/db";
 
 interface Props {
   params: { slug: string };
 }
 
-export function generateStaticParams() {
-  return staticNews.map((article) => ({ slug: article.slug }));
-}
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const article = staticNews.find((a) => a.slug === params.slug);
+  const article = await db.news.findUnique({ where: { slug: params.slug } });
   if (!article) return { title: "Tapılmadı" };
   return {
     title: article.titleAz,
@@ -23,11 +21,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default function NewsArticlePage({ params }: Props) {
-  const article = staticNews.find((a) => a.slug === params.slug);
-  if (!article) notFound();
+export default async function NewsArticlePage({ params }: Props) {
+  const article = await db.news.findUnique({ where: { slug: params.slug } });
+  if (!article || !article.published) notFound();
 
-  const related = staticNews.filter((a) => a.slug !== params.slug);
+  const related = await db.news.findMany({
+    where: { published: true, slug: { not: params.slug } },
+    orderBy: { createdAt: "desc" },
+    take: 3,
+  });
 
   const formatContent = (text: string) => {
     return text
@@ -72,9 +74,6 @@ export default function NewsArticlePage({ params }: Props) {
             <h1 className="font-playfair text-4xl md:text-5xl font-bold text-white leading-tight mb-6">
               {article.titleAz}
             </h1>
-            {article.titleRu && (
-              <p className="text-gray-500 text-lg italic">{article.titleRu}</p>
-            )}
           </SectionReveal>
         </div>
       </section>
@@ -82,7 +81,6 @@ export default function NewsArticlePage({ params }: Props) {
       {/* Article content */}
       <section className="py-12 bg-dark">
         <div className="max-w-4xl mx-auto px-4">
-          {/* Featured image */}
           {article.imageUrl && (
             <SectionReveal className="mb-10">
               <div className="relative h-80 md:h-96 rounded-2xl overflow-hidden border border-gold/15">
@@ -97,7 +95,6 @@ export default function NewsArticlePage({ params }: Props) {
             </SectionReveal>
           )}
 
-          {/* Content */}
           <SectionReveal delay={0.1}>
             <div
               className="prose-gold"
@@ -105,22 +102,6 @@ export default function NewsArticlePage({ params }: Props) {
             />
           </SectionReveal>
 
-          {/* Russian content */}
-          {article.contentRu && (
-            <SectionReveal delay={0.2} className="mt-10">
-              <div className="glass border border-gold/15 rounded-2xl p-6">
-                <h3 className="font-playfair text-xl text-gold font-bold mb-4">
-                  Русская версия / Rus dilindəki versiya
-                </h3>
-                <div
-                  className="prose-gold"
-                  dangerouslySetInnerHTML={{ __html: formatContent(article.contentRu) }}
-                />
-              </div>
-            </SectionReveal>
-          )}
-
-          {/* Author/company tag */}
           <SectionReveal delay={0.3} className="mt-10">
             <div className="glass border border-gold/15 rounded-xl p-5 flex items-center gap-4">
               <div className="w-12 h-12 rounded-full bg-gold/10 border border-gold/20 flex items-center justify-center text-gold">
@@ -146,9 +127,7 @@ export default function NewsArticlePage({ params }: Props) {
         <section className="py-16 bg-off-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <SectionReveal className="mb-8">
-              <h2 className="font-playfair text-3xl font-bold text-dark">
-                Digər Xəbərlər
-              </h2>
+              <h2 className="font-playfair text-3xl font-bold text-dark">Digər Xəbərlər</h2>
             </SectionReveal>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {related.map((rel) => (

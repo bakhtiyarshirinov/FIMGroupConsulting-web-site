@@ -38,18 +38,7 @@ Set `DATABASE_URL` in `.env` to a `postgresql://...` connection string.
 npx prisma migrate dev --name init
 ```
 
-### 4. Seed the database
-
-```bash
-npx prisma db seed
-```
-
-This populates:
-- 5 service categories
-- 3 sample news articles
-- Site settings (phone, email, addresses)
-
-### 5. Run development server
+### 4. Run development server
 
 ```bash
 npm run dev
@@ -77,9 +66,7 @@ Open [http://localhost:3000](http://localhost:3000)
 | `/admin` | Login |
 | `/admin/dashboard` | Stats overview |
 | `/admin/xeberler` | News CRUD (create, edit, delete, publish toggle) |
-| `/admin/mesajlar` | Contact form submissions with read/unread |
-| `/admin/xidmetler` | Service descriptions + visibility toggle |
-| `/admin/ayarlar` | Site settings (phone, email, addresses) |
+| `/admin/mesajlar` | Contact form submissions with read/unread, filter, delete |
 
 ---
 
@@ -96,10 +83,13 @@ Open [http://localhost:3000](http://localhost:3000)
 
 ```bash
 npx prisma studio          # Visual DB browser
-npx prisma migrate dev     # Apply schema changes
-npx prisma db seed         # Re-seed data
-npm run db:reset           # Reset + re-migrate (⚠️ deletes all data)
+npx prisma migrate dev     # Apply schema changes (local dev)
 ```
+
+**Migrations are not run during the Vercel build.** `vercel.json`'s build command only
+runs `prisma generate && next build`. Apply schema migrations manually against the Neon
+database using its direct connection string, either from local dev (`npx prisma migrate
+dev`) or in CI/CD with `npx prisma migrate deploy` before/after a deploy.
 
 ---
 
@@ -148,26 +138,17 @@ git push -u origin main
 
 3. Deploy — Vercel runs `prisma generate && next build` automatically
 
-### 4. Run migrations and seed (before first use)
+### 4. Run migrations (before first use)
 
-Vercel build does **not** run migrations — run these locally against the production database:
+Vercel build does **not** run migrations — run these manually against the Neon database
+using its direct (non-pooled) connection string:
 
 ```bash
 # Pull Vercel env vars locally
 npx vercel env pull .env.local
 
 # Apply migrations
-DATABASE_URL="<your_neon_connection_string>" npx prisma migrate deploy
-
-# Seed initial data
-DATABASE_URL="<your_neon_connection_string>" npx prisma db seed
-```
-
-Or set `DATABASE_URL` in your local `.env` temporarily and run:
-
-```bash
-npx prisma migrate deploy
-npx prisma db seed
+DATABASE_URL="<your_neon_direct_connection_string>" npx prisma migrate deploy
 ```
 
 ### 5. Add custom domain

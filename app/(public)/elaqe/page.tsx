@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { SectionReveal, StaggerContainer, StaggerItem } from "@/components/shared/SectionReveal";
+import { ContactForm } from "./ContactForm";
 
 export const metadata: Metadata = {
   title: "Əlaqə",
@@ -108,6 +109,23 @@ export default function ElaqePage() {
               </StaggerItem>
             ))}
           </StaggerContainer>
+        </div>
+      </section>
+
+      {/* Contact form */}
+      <section className="pb-20 bg-off-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <SectionReveal>
+            <div className="bg-white border border-gold/15 rounded-2xl p-8">
+              <h2 className="font-playfair text-3xl font-bold text-dark mb-2">
+                Mesaj Göndərin
+              </h2>
+              <p className="text-gray-500 text-sm font-inter mb-8">
+                Bütün sahələri doldurun, tezliklə sizinlə əlaqə saxlayacağıq
+              </p>
+              <ContactForm />
+            </div>
+          </SectionReveal>
         </div>
       </section>
 
