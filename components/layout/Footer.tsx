@@ -144,6 +144,12 @@ export function Footer() {
                   >
                     +994 70 230 23 38
                   </a>
+                  <a
+                    href="tel:+994513311005"
+                    className="text-gray-400 hover:text-gold transition-colors block"
+                  >
+                    +994 51 331 10 05
+                  </a>
                 </div>
               </li>
               <li className="flex items-center gap-3">

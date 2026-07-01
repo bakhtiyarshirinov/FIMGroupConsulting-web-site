@@ -114,7 +114,7 @@ export function HeroSection() {
           className="mt-20 grid grid-cols-3 gap-8 max-w-lg mx-auto"
         >
           {[
-            { label: "İllik təcrübə", value: "14+" },
+            { label: "İllik təcrübə", value: "10+" },
             { label: "Müştərilər", value: "500+" },
             { label: "Layihələr", value: "1200+" },
           ].map((stat) => (
